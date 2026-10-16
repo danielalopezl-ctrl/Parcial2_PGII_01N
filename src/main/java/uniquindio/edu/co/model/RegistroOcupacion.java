@@ -1,4 +1,4 @@
-package Cinema.model;
+package uniquindio.edu.co.model;
 
 public record RegistroOcupacion() {
 }
