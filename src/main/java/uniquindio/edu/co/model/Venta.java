@@ -2,9 +2,16 @@ package uniquindio.edu.co.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Representa una venta de boletas realizada en taquilla por un operario a un cliente.
+ * Cada venta pertenece a una función cinematográfica específica y contiene una o varias boletas.
+ * El valor total se calcula sumando los valores individuales de las boletas adquiridas.
+ */
 public class Venta {
 
+    // Atributos de la clase Venta
     private String codigo;
     private LocalDateTime fecha;
     private Cliente cliente;
@@ -12,13 +19,13 @@ public class Venta {
     private List<Boleto> boletos;
 
     /**
-     * metodo constructor
-     * @param codigo de la venta
-     * @param fecha de la venta
-     * @param cliente de la venta
-     * @param operador de la venta
+     * Constructor de la clase Venta.
+     *
+     * @param codigo   Código único identificador de la venta
+     * @param fecha    Fecha y hora de realización de la venta
+     * @param cliente  Cliente que adquiere las boletas
+     * @param operador Operario de taquilla responsable del registro de la venta
      */
-
     public Venta(String codigo, LocalDateTime fecha, Cliente cliente, Operador operador) {
         this.codigo = codigo;
         this.fecha = fecha != null ? fecha : LocalDateTime.now();
@@ -27,39 +34,49 @@ public class Venta {
         this.boletos = new ArrayList<>();
     }
 
+    /**
+     * Agrega una boleta a la lista de boletas adquiridas en esta venta.
+     *
+     * @param boleto Boleta individual a asociar
+     */
     public void agregarBoleto(Boleto boleto) {
         this.boletos.add(boleto);
     }
 
     /**
-     * Metodo para la suma de los precio de las boletas con el recargo antes del descuento
-     * @return
+     * Calcula la suma de los valores base con recargo de todas las boletas de la venta
+     * antes de aplicar el descuento personal del cliente.
+     *
+     * @return Valor numérico del subtotal
      */
-
     public double calcularSubtotal() {
         double subtotal = 0.0;
         for (Boleto b : boletos) {
-            // El precio de la boleta con recargo de la sala
-            subtotal += b.getFuncion().calcularPrecioBoleta();
+            if (b.getFuncion() != null) {
+                subtotal += b.getFuncion().calcularPrecioBoleta();
+            } else {
+                subtotal += b.getValorPagado();
+            }
         }
         return subtotal;
     }
 
     /**
-     * metodo para calcular el monto ahorrado por el descuento del cliente
-     * @return
+     * Calcula el monto en dinero correspondiente al descuento del cliente aplicado sobre el subtotal.
+     *
+     * @return Valor monetario del descuento otorgado
      */
-
     public double calcularDescuento() {
         if (cliente == null) return 0.0;
         return calcularSubtotal() * cliente.calcularDescuento();
     }
 
     /**
-     * metodo para calcular el valor final pagado por la venta
-     * @return
+     * Calcula el valor total de la venta sumando los valores individuales pagados de todas las boletas adquiridas.
+     * Cumple con el requerimiento 5 del parcial.
+     *
+     * @return Valor total a pagar por la venta
      */
-
     public double calcularTotal() {
         double total = 0.0;
         for (Boleto b : boletos) {
@@ -68,6 +85,7 @@ public class Venta {
         return total;
     }
 
+    // Getters y Setters
     public String getCodigo() {
         return codigo;
     }
@@ -110,12 +128,10 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" +
-                "codigo='" + codigo + '\'' +
-                ", fecha=" + fecha +
-                ", cliente=" + cliente +
-                ", operador=" + operador +
-                ", boletos=" + boletos +
-                '}';
+        return "Venta #" + codigo + " | Fecha: " + fecha +
+               " | Cliente: " + (cliente != null ? cliente.getNombreCompleto() : "N/A") +
+               " | Operador: " + (operador != null ? operador.getNombreCompleto() : "N/A") +
+               " | Boletas: " + boletos.size() +
+               " | Total pagado: $" + calcularTotal();
     }
 }
