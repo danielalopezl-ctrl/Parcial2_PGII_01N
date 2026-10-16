@@ -17,7 +17,7 @@ public class CinePlus {
     private List<Funcion> listFunciones;
     private List<Venta> listVentas;
 
-    public Cineplus(String nombreComercial, String nit, String direccion) {
+    public Cineplus (String nombreComercial, String nit, String direccion) {
         this.nombreComercial = nombreComercial;
         this.nit = nit;
         this.direccion = direccion;
@@ -30,6 +30,7 @@ public class CinePlus {
 
     /**
      * Registrar Peliculas
+     *
      * @param codigo
      * @param titulo
      * @param duracion
@@ -46,6 +47,7 @@ public class CinePlus {
         return true;
     }
 
+<<<<<<< HEAD
     /**
      * Metodo Constructor para Registrar Clientes
      * @param documento de Clientes
@@ -61,6 +63,10 @@ public class CinePlus {
     public boolean registrarCliente(String documento, String nombre, String  correo, String telefono,
                                     String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
         if (buscarCliente(documento) != null){
+=======
+    public boolean registrarCliente(String documento, String nombre, String correo, String telefono, String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
+        if (buscarCliente(documento) != null) {
+>>>>>>> 6ef7f672f2f9e926df63e9baaa7c8b33533f280d
             return false;
         }
         Cliente nuevo = new Cliente(documento, nombre, correo, telefono, codigoAfiliacion, porcentajeDescuento, fechaRegistro);
@@ -68,11 +74,14 @@ public class CinePlus {
         return true;
     }
 
+<<<<<<< HEAD
     /**
      * Buscar Cliente
      * @param documento de Cliente
      * @return
      */
+=======
+>>>>>>> 6ef7f672f2f9e926df63e9baaa7c8b33533f280d
     public Cliente buscarCliente(String documento) {
         for (Cliente c : clientes) {
             if (c.getDocumento().equalsIgnoreCase(documento)) return c;
@@ -80,6 +89,7 @@ public class CinePlus {
         return null;
     }
 
+<<<<<<< HEAD
     /**
      * Metod para Registar Operador
      * @param documento de Operador
@@ -91,6 +101,8 @@ public class CinePlus {
      * @param salario de Operador
      * @return
      */
+=======
+>>>>>>> 6ef7f672f2f9e926df63e9baaa7c8b33533f280d
     public boolean registrarOperador(String documento, String nombre, String correo, String telefono,
                                      String codigoEmpleado, LocalDate fechaContratacion, double salario) {
         if (buscarOperador(documento) != null) {
@@ -100,21 +112,25 @@ public class CinePlus {
         operadores.add(nuevo);
         return true;
     }
+
     public Operador buscarOperador(String documento) {
         for (Operador op : operadores) {
             if (op.getDocumento().equalsIgnoreCase(documento)) return op;
         }
         return null;
     }
+
     public void agregarSala(Sala sala) {
         listSalas.add(sala);
     }
+
     public Sala buscarSala(int numero) {
         for (Sala s : listSalas) {
             if (s.getNumero() == numero) return s;
         }
         return null;
     }
+<<<<<<< HEAD
 
     /**
      * Metodo para programar funcion
@@ -252,4 +268,6 @@ public class CinePlus {
     public List<Operador> getOperadores() { return operadores; }
     public List<Venta> getListVentas() { return listVentas; }
 
+=======
+>>>>>>> 6ef7f672f2f9e926df63e9baaa7c8b33533f280d
 }
