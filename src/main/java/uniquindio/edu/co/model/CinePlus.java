@@ -17,7 +17,7 @@ public class CinePlus {
     private List<Funcion> listFunciones;
     private List<Venta> listVentas;
 
-    public Cineplus(String nombreComercial, String nit, String direccion) {
+    public Cineplus (String nombreComercial, String nit, String direccion) {
         this.nombreComercial = nombreComercial;
         this.nit = nit;
         this.direccion = direccion;
@@ -30,6 +30,7 @@ public class CinePlus {
 
     /**
      * Registrar Peliculas
+     *
      * @param codigo
      * @param titulo
      * @param duracion
@@ -46,20 +47,22 @@ public class CinePlus {
         return true;
     }
 
-    public boolean registrarCliente(String documento, String nombre, String  correo, String telefono, String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
-        if (buscarCliente(documento) != null){
+    public boolean registrarCliente(String documento, String nombre, String correo, String telefono, String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
+        if (buscarCliente(documento) != null) {
             return false;
         }
         Cliente nuevo = new Cliente(documento, nombre, correo, telefono, codigoAfiliacion, porcentajeDescuento, fechaRegistro);
         clientes.add(nuevo);
         return true;
     }
+
     public Cliente buscarCliente(String documento) {
         for (Cliente c : clientes) {
             if (c.getDocumento().equalsIgnoreCase(documento)) return c;
         }
         return null;
     }
+
     public boolean registrarOperador(String documento, String nombre, String correo, String telefono,
                                      String codigoEmpleado, LocalDate fechaContratacion, double salario) {
         if (buscarOperador(documento) != null) {
@@ -69,18 +72,22 @@ public class CinePlus {
         operadores.add(nuevo);
         return true;
     }
+
     public Operador buscarOperador(String documento) {
         for (Operador op : operadores) {
             if (op.getDocumento().equalsIgnoreCase(documento)) return op;
         }
         return null;
     }
+
     public void agregarSala(Sala sala) {
         listSalas.add(sala);
     }
+
     public Sala buscarSala(int numero) {
         for (Sala s : listSalas) {
             if (s.getNumero() == numero) return s;
         }
         return null;
+    }
 }
