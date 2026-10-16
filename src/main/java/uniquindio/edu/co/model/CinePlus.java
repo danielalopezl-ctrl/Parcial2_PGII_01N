@@ -46,7 +46,8 @@ public class CinePlus {
         return true;
     }
 
-    public boolean registrarCliente(String documento, String nombre, String  correo, String telefono, String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
+    public boolean registrarCliente(String documento, String nombre, String  correo, String telefono,
+                                    String codigoAlfanumerico, double porcentajeDescuento, LocalDate fechaRegistro) {
         if (buscarCliente(documento) != null){
             return false;
         }
